@@ -21,11 +21,25 @@ function Logo() {
 }
 function Form() {
   const [userInput, setUserInput] = useState('');
-  const [userSelection, setUserSelection] = useState(5);
+  const [userSelection, setUserSelection] = useState(1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!userInput) {
+      alert('Please type in the item name');
+      return;
+    }
+
+    const newItem = {
+      name: userInput,
+      quantity: userSelection,
+      packed: false,
+      id: Date.now(),
+    };
+
     setUserInput('');
+    setUserSelection(1);
   };
 
   return (
