@@ -21,10 +21,10 @@ function Logo() {
 }
 function Form() {
   const [userInput, setUserInput] = useState('');
+  const [userSelection, setUserSelection] = useState(5);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userInput, 'here');
     setUserInput('');
   };
 
@@ -34,6 +34,10 @@ function Form() {
       onSubmit={handleSubmit}>
       <h3>What do you need for your 😍 trip?</h3>
       <select
+        value={userSelection}
+        onChange={(e) => {
+          setUserSelection(+e.target.value);
+        }}
         name=""
         id="">
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
@@ -48,7 +52,9 @@ function Form() {
         type="text"
         placeholder="Item..."
         value={userInput}
-        onChange={(e) => setUserInput(e.target.value)}
+        onChange={(e) => {
+          setUserInput(e.target.value);
+        }}
       />
       <button>Add</button>
     </form>
