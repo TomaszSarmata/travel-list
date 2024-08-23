@@ -22,6 +22,13 @@ function Logo() {
 function Form() {
   const [userInput, setUserInput] = useState('');
   const [userSelection, setUserSelection] = useState(1);
+  const [items, setItems] = useState([]);
+
+  const handleAddItems = (item) => {
+    setItems((curr) => {
+      return [item, ...curr];
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,6 +44,8 @@ function Form() {
       packed: false,
       id: Date.now(),
     };
+
+    handleAddItems(newItem);
 
     setUserInput('');
     setUserSelection(1);
