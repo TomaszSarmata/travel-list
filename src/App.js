@@ -15,11 +15,20 @@ export default function App() {
     });
   };
 
+  const handleDeleteItem = (itemToDelete) => {
+    setItems((curr) => {
+      return curr.filter((item) => item.id !== itemToDelete.id);
+    });
+  };
+
   return (
     <div className="app">
       <Logo />
       <Form onAddItems={handleAddItems} />
-      <PackingList items={items} />
+      <PackingList
+        items={items}
+        onDeleteItem={handleDeleteItem}
+      />
       <Stats />
     </div>
   );
@@ -85,7 +94,7 @@ function Form({ onAddItems }) {
     </form>
   );
 }
-function PackingList({ items }) {
+function PackingList({ items, onDeleteItem }) {
   return (
     <div className="list">
       <ul className="list">
@@ -94,6 +103,7 @@ function PackingList({ items }) {
             <Item
               item={item}
               key={item.id}
+              onDeleteItem={onDeleteItem}
             />
           ))
         ) : (
@@ -104,12 +114,17 @@ function PackingList({ items }) {
   );
 }
 
-function Item({ item }) {
+function Item({ item, onDeleteItem }) {
   return (
     <li key={item.id}>
       <span style={item.packed ? { textDecoration: 'line-through' } : {}}>
         {item.quantity} {item.description}
-        <button>❌</button>
+        <button
+          onClick={() => {
+            onDeleteItem(item);
+          }}>
+          ❌
+        </button>
       </span>
     </li>
   );
