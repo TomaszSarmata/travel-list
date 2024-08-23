@@ -89,19 +89,16 @@ function PackingList({ items }) {
   return (
     <div className="list">
       <ul className="list">
-        {items.length > 0
-          ? items.map((item) => (
-              <Item
-                item={item}
-                key={item.id}
-              />
-            ))
-          : initialItems.map((item) => (
-              <Item
-                item={item}
-                key={item.id}
-              />
-            ))}
+        {items.length > 0 ? (
+          items.map((item) => (
+            <Item
+              item={item}
+              key={item.id}
+            />
+          ))
+        ) : (
+          <p>Add items to your travel list to see them displayed over here</p>
+        )}
       </ul>
     </div>
   );
