@@ -7,11 +7,16 @@ const initialItems = [
 ];
 
 export default function App() {
+  const [items, setItems] = useState([]);
+
   return (
     <div className="app">
       <Logo />
-      <Form />
-      <PackingList />
+      <Form
+        items={items}
+        setItems={setItems}
+      />
+      <PackingList items={items} />
       <Stats />
     </div>
   );
@@ -19,10 +24,10 @@ export default function App() {
 function Logo() {
   return <h1>🌴 Far Away 🧳</h1>;
 }
-function Form() {
+function Form({ items, setItems }) {
   const [userInput, setUserInput] = useState('');
   const [userSelection, setUserSelection] = useState(1);
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
 
   const handleAddItems = (item) => {
     setItems((curr) => {
@@ -39,7 +44,7 @@ function Form() {
     }
 
     const newItem = {
-      name: userInput,
+      description: userInput,
       quantity: userSelection,
       packed: false,
       id: Date.now(),
@@ -83,16 +88,23 @@ function Form() {
     </form>
   );
 }
-function PackingList() {
+function PackingList({ items }) {
   return (
     <div className="list">
       <ul className="list">
-        {initialItems.map((item) => (
-          <Item
-            item={item}
-            key={item.id}
-          />
-        ))}
+        {items.length > 0
+          ? items.map((item) => (
+              <Item
+                item={item}
+                key={item.id}
+              />
+            ))
+          : initialItems.map((item) => (
+              <Item
+                item={item}
+                key={item.id}
+              />
+            ))}
       </ul>
     </div>
   );
