@@ -27,6 +27,7 @@ export default function App() {
       <Form onAddItems={handleAddItems} />
       <PackingList
         items={items}
+        setItems={setItems}
         onDeleteItem={handleDeleteItem}
       />
       <Stats />
@@ -94,7 +95,7 @@ function Form({ onAddItems }) {
     </form>
   );
 }
-function PackingList({ items, onDeleteItem }) {
+function PackingList({ items, setItems, onDeleteItem }) {
   return (
     <div className="list">
       <ul className="list">
@@ -102,6 +103,7 @@ function PackingList({ items, onDeleteItem }) {
           items.map((item) => (
             <Item
               item={item}
+              setItems={setItems}
               key={item.id}
               onDeleteItem={onDeleteItem}
             />
@@ -114,9 +116,22 @@ function PackingList({ items, onDeleteItem }) {
   );
 }
 
-function Item({ item, onDeleteItem }) {
+function Item({ item, setItems, onDeleteItem }) {
   return (
     <li key={item.id}>
+      <input
+        type="checkbox"
+        onClick={() =>
+          setItems((curr) =>
+            curr.map((element) => {
+              return element.id !== item.id
+                ? element
+                : { ...element, packed: !element.packed };
+            })
+          )
+        }
+        checked={item.packed}
+      />
       <span style={item.packed ? { textDecoration: 'line-through' } : {}}>
         {item.quantity} {item.description}
         <button
