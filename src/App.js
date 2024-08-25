@@ -40,7 +40,6 @@ function Logo() {
 function Form({ onAddItems }) {
   const [userInput, setUserInput] = useState('');
   const [userSelection, setUserSelection] = useState(1);
-  // const [items, setItems] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
