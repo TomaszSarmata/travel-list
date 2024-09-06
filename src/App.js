@@ -151,7 +151,7 @@ function Stats({ items }) {
   if (!items.length) {
     return (
       <p className="footer">
-        <em>Start adding some items to your packing list</em>
+        <em>Start adding some items to your packing list 🚀</em>
       </p>
     );
   }
@@ -161,7 +161,7 @@ function Stats({ items }) {
   return (
     <footer className="stats">
       {percentagePacked === 100 ? (
-        <em>You have packed all of your items and are ready to go!!!</em>
+        <em>You have packed all of your items and are ready to go ✈️</em>
       ) : (
         <em>
           💼 You have {items.length} {items.length > 1 ? 'items' : 'item'} on
