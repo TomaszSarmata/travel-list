@@ -120,7 +120,7 @@ function Item({ item, setItems, onDeleteItem }) {
     <li key={item.id}>
       <input
         type="checkbox"
-        onClick={() =>
+        onChange={() =>
           setItems((curr) =>
             curr.map((element) => {
               return element.id !== item.id
@@ -129,7 +129,7 @@ function Item({ item, setItems, onDeleteItem }) {
             })
           )
         }
-        checked={item.packed}
+        value={item.packed}
       />
       <span style={item.packed ? { textDecoration: 'line-through' } : {}}>
         {item.quantity} {item.description}
