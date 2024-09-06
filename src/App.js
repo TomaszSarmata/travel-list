@@ -40,7 +40,7 @@ export default function App() {
         onDeleteItem={handleDeleteItem}
         onToggleItem={onToggleItem}
       />
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 }
@@ -147,10 +147,14 @@ function Item({ item, setItems, onDeleteItem, onToggleItem }) {
   );
 }
 
-function Stats() {
+function Stats({ items }) {
   return (
     <footer className="stats">
-      <em>💼 You have x items on your list, and you already packed X (X%)</em>
+      <em>
+        💼 You have {items.length} {items.length > 1 ? 'items' : 'item'} on your
+        list, and you already packed{' '}
+        {items.filter((item) => item.packed === true).length}
+      </em>
     </footer>
   );
 }
