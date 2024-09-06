@@ -21,6 +21,15 @@ export default function App() {
     });
   };
 
+  const onToggleItem = (item) =>
+    setItems((curr) =>
+      curr.map((element) => {
+        return element.id !== item.id
+          ? element
+          : { ...element, packed: !element.packed };
+      })
+    );
+
   return (
     <div className="app">
       <Logo />
@@ -29,6 +38,7 @@ export default function App() {
         items={items}
         setItems={setItems}
         onDeleteItem={handleDeleteItem}
+        onToggleItem={onToggleItem}
       />
       <Stats />
     </div>
@@ -94,7 +104,7 @@ function Form({ onAddItems }) {
     </form>
   );
 }
-function PackingList({ items, setItems, onDeleteItem }) {
+function PackingList({ items, setItems, onDeleteItem, onToggleItem }) {
   return (
     <div className="list">
       <ul className="list">
@@ -105,6 +115,7 @@ function PackingList({ items, setItems, onDeleteItem }) {
               setItems={setItems}
               key={item.id}
               onDeleteItem={onDeleteItem}
+              onToggleItem={onToggleItem}
             />
           ))
         ) : (
@@ -115,20 +126,12 @@ function PackingList({ items, setItems, onDeleteItem }) {
   );
 }
 
-function Item({ item, setItems, onDeleteItem }) {
+function Item({ item, setItems, onDeleteItem, onToggleItem }) {
   return (
     <li key={item.id}>
       <input
         type="checkbox"
-        onChange={() =>
-          setItems((curr) =>
-            curr.map((element) => {
-              return element.id !== item.id
-                ? element
-                : { ...element, packed: !element.packed };
-            })
-          )
-        }
+        onChange={() => onToggleItem(item)}
         value={item.packed}
       />
       <span style={item.packed ? { textDecoration: 'line-through' } : {}}>
