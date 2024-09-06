@@ -148,12 +148,14 @@ function Item({ item, setItems, onDeleteItem, onToggleItem }) {
 }
 
 function Stats({ items }) {
+  const itemsPacked = items.filter((item) => item.packed === true).length;
+  const percentagePacked = Math.round((itemsPacked / items.length) * 100);
   return (
     <footer className="stats">
       <em>
         💼 You have {items.length} {items.length > 1 ? 'items' : 'item'} on your
-        list, and you already packed{' '}
-        {items.filter((item) => item.packed === true).length}
+        list, and you already packed {itemsPacked} items, which constitutes{' '}
+        {percentagePacked}% of the entire list.
       </em>
     </footer>
   );
