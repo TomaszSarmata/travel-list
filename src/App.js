@@ -152,11 +152,15 @@ function Stats({ items }) {
   const percentagePacked = Math.round((itemsPacked / items.length) * 100);
   return (
     <footer className="stats">
-      <em>
-        💼 You have {items.length} {items.length > 1 ? 'items' : 'item'} on your
-        list, and you already packed {itemsPacked} items, which constitutes{' '}
-        {percentagePacked}% of the entire list.
-      </em>
+      {percentagePacked === 100 ? (
+        <em>You have packed all of your items and are ready to go!!!</em>
+      ) : (
+        <em>
+          💼 You have {items.length} {items.length > 1 ? 'items' : 'item'} on
+          your list, and you already packed {itemsPacked} items, which
+          constitutes {percentagePacked}% of the entire list.
+        </em>
+      )}
     </footer>
   );
 }
