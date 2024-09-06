@@ -148,6 +148,14 @@ function Item({ item, setItems, onDeleteItem, onToggleItem }) {
 }
 
 function Stats({ items }) {
+  if (!items.length) {
+    return (
+      <p className="footer">
+        <em>Start adding some items to your packing list</em>
+      </p>
+    );
+  }
+
   const itemsPacked = items.filter((item) => item.packed === true).length;
   const percentagePacked = Math.round((itemsPacked / items.length) * 100);
   return (
